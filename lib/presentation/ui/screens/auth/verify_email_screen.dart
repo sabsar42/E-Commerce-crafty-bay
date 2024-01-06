@@ -1,6 +1,7 @@
+import 'package:e_commerce_flutter_crafty_bay/presentation/ui/screens/auth/verify_otp_screen.dart';
 import 'package:e_commerce_flutter_crafty_bay/presentation/ui/widget/app_logo.dart';
 import 'package:flutter/material.dart';
-
+import 'package:get/get.dart';
 class VerifyEmailScreen extends StatelessWidget {
   const VerifyEmailScreen({super.key});
 
@@ -45,7 +46,8 @@ class VerifyEmailScreen extends StatelessWidget {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    // Get.to(const VerifyOTPScreen());
+
+                     Get.to(const VerifyOTPScreen());
                   },
                   child: const Text('Next'),
                 ),
