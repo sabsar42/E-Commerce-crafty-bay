@@ -7,6 +7,7 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 import '../../utility/app_colors.dart';
 import '../auth/complete_profile_screen.dart';
 import 'package:get/get.dart';
+
 class VerifyOTPScreen extends StatefulWidget {
   const VerifyOTPScreen({super.key});
 
@@ -15,21 +16,30 @@ class VerifyOTPScreen extends StatefulWidget {
 }
 
 class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
+  Timer? _timer;
+  int start = 120;
+  late String count;
+
   @override
   void initState() {
     super.initState();
-    resendOtpCounter();
+    countOTPTimer();
   }
 
-  Future<dynamic> resendOtpCounter() async {
-    dynamic timerC = await Future.delayed(
-      const Duration(seconds: 120),
-    );
-    print(timerC);
-    return timerC;
+  void countOTPTimer() {
+    const oneSec = Duration(milliseconds: 1000);
+    _timer = new Timer.periodic(oneSec, (_timer) {
+      if (start == 0) {
+        setState(() {
+          _timer.cancel();
+        });
+      } else {
+        setState(() {
+          start--;
+        });
+      }
+    });
   }
-
-  late dynamic X = resendOtpCounter();
 
   @override
   Widget build(BuildContext context) {
@@ -102,15 +112,15 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
                 height: 24,
               ),
               RichText(
-                text: const TextSpan(
+                text: TextSpan(
                   style: TextStyle(
                     color: Colors.grey,
                   ),
                   children: [
-                    TextSpan(text: 'This code will expire '),
+                    TextSpan(text: 'This code will expire in '),
                     // TODO - make this timer workable
                     TextSpan(
-                      text:  's',
+                      text: '$start',
                       style: TextStyle(
                         color: AppColors.primaryColor,
                         fontWeight: FontWeight.w600,
@@ -120,7 +130,12 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
                 ),
               ),
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  setState(() {
+                    start = 120;
+                  });
+                  countOTPTimer();
+                },
                 child: const Text(
                   'Resend Code',
                   style: TextStyle(color: Colors.grey),
