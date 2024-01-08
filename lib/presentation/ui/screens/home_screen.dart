@@ -6,6 +6,7 @@ import '../widget/home/circle_icon_button.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 import '../widget/home/banner_carousel.dart';
+import '../widget/home/section_title.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -35,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
               SizedBox(
                 height: 16,
               ),
-              SectionTitleWidget()
+              SectionTitle(title: 'All Categories', onTapSeeAll: () {})
             ],
           ),
         ),
@@ -100,29 +101,6 @@ class _HomeScreenState extends State<HomeScreen> {
         const SizedBox(
           width: 12,
         ),
-      ],
-    );
-  }
-}
-
-class SectionTitleWidget extends StatelessWidget {
-  const SectionTitleWidget({
-    super.key,
-  });
-
-  final String title;
-  final  oidCa
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text('All Categories',
-        style: TextStyle(
-          fontSize: 20,
-          fontWeight: FontWeight.w600,
-        ),),
-        TextButton(onPressed: (){}, child: Text('See All')),
       ],
     );
   }
