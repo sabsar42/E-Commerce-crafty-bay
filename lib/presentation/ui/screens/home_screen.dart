@@ -2,6 +2,7 @@ import 'package:e_commerce_flutter_crafty_bay/presentation/ui/utility/app_colors
 import 'package:e_commerce_flutter_crafty_bay/presentation/ui/utility/assets_path.dart';
 import 'package:flutter/material.dart';
 
+import '../widget/category_item.dart';
 import '../widget/home/circle_icon_button.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
@@ -36,12 +37,63 @@ class _HomeScreenState extends State<HomeScreen> {
               SizedBox(
                 height: 16,
               ),
-              SectionTitle(title: 'All Categories', onTapSeeAll: () {})
+              SectionTitle(title: 'All Categories', onTapSeeAll: () {}),
+              categoryList(),
+              SectionTitle(title: 'Popular', onTapSeeAll: () {}),
+              popularProductList()
             ],
           ),
         ),
       ),
     );
+  }
+
+  SizedBox categoryList() {
+    return SizedBox(
+              height: 120,
+              child: ListView.separated(
+                itemCount: 10,
+                primary: false,
+                shrinkWrap: true,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) {
+                  return CategoryItem(
+                    title: 'Electronics',
+                  );
+                },
+                separatorBuilder: (_, __) {
+                  return SizedBox(
+                    width: 10,
+                  );
+                },
+              ),
+            );
+  }
+
+  SizedBox popularProductList() {
+    return SizedBox(
+              height: 120,
+              child: ListView.separated(
+                itemCount: 10,
+                primary: false,
+                shrinkWrap: true,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) {
+                  return Card(
+                    child: Column(
+                      children: [
+
+                      ],
+                    )
+                  );
+                },
+                separatorBuilder: (_, __) {
+                  return SizedBox(
+                    width: 10,
+                  );
+                },
+              ),
+            );
   }
 
   TextFormField get searchTextField {

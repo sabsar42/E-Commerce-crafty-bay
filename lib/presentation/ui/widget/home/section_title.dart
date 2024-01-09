@@ -17,7 +17,7 @@ class SectionTitle extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          'All Categories',
+          title,
           style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.w600,
