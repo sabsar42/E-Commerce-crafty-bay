@@ -1,5 +1,4 @@
 import 'package:e_commerce_flutter_crafty_bay/presentation/ui/screens/product_list_screen.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../utility/app_colors.dart';
@@ -31,8 +30,8 @@ class _CategoryItemState extends State<CategoryItem> {
           Card(
             elevation: 0,
             color: AppColors.primaryColor.withOpacity(0.1),
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
+            child: const Padding(
+              padding: EdgeInsets.all(16.0),
               child: Icon(
                 Icons.computer_outlined,
                 size: 32,
@@ -42,7 +41,7 @@ class _CategoryItemState extends State<CategoryItem> {
           ),
           Text(
             widget.title,
-            style: TextStyle(
+            style: const TextStyle(
                 fontWeight: FontWeight.w400,
                 fontSize: 13,
                 color: AppColors.primaryColor),

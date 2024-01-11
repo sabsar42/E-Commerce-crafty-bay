@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../utility/app_colors.dart';
@@ -22,7 +21,7 @@ class ProductCardItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ClipRRect(
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(16),
                   topRight: Radius.circular(16),
                 ),
@@ -52,15 +51,15 @@ class ProductCardItem extends StatelessWidget {
                     Row(
                       // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
+                        const Text(
                           '\$120',
                           style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w600,
                               color: AppColors.primaryColor),
                         ),
-                        SizedBox(width: 8,),
-                        Wrap(
+                        const SizedBox(width: 8,),
+                        const Wrap(
                           crossAxisAlignment: WrapCrossAlignment.center,
                           children: [
                             Icon(
@@ -77,20 +76,20 @@ class ProductCardItem extends StatelessWidget {
                             ),
                           ],
                         ),
-                        SizedBox(width: 8,),
+                        const SizedBox(width: 8,),
                         Card(
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(6),
                           ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(4.0),
+                          color: AppColors.primaryColor,
+                          child: const Padding(
+                            padding: EdgeInsets.all(4.0),
                             child: Icon(
                               Icons.favorite_border_outlined,
                               size: 12,
                               color: Colors.white70,
                             ),
                           ),
-                          color: AppColors.primaryColor,
                         )
                       ],
                     )

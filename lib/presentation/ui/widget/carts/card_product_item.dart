@@ -1,10 +1,6 @@
-import 'package:e_commerce_flutter_crafty_bay/presentation/state_holders/main_bottom_nav_contoller.dart';
 import 'package:e_commerce_flutter_crafty_bay/presentation/ui/utility/assets_path.dart';
-import 'package:e_commerce_flutter_crafty_bay/presentation/ui/widget/product_card_item.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-import '../../screens/carts_screeen.dart';
 import 'package:item_count_number_button/item_count_number_button.dart';
 
 import '../../utility/app_colors.dart';
@@ -30,7 +26,7 @@ class _CrardProductItemState extends State<CrardProductItem> {
             AssetsPath.dummyShoeImagePng,
             width: 100,
           ),
-          SizedBox(
+          const SizedBox(
             width: 8,
           ),
           Column(
@@ -38,7 +34,7 @@ class _CrardProductItemState extends State<CrardProductItem> {
             children: [
               Row(
                 children: [
-                  Column(
+                  const Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
@@ -61,12 +57,12 @@ class _CrardProductItemState extends State<CrardProductItem> {
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 80,
                   ),
                   IconButton(
                       onPressed: () {},
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.delete_outline_rounded,
                         color: Colors.black38,
                       ))
@@ -75,14 +71,14 @@ class _CrardProductItemState extends State<CrardProductItem> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     '\$120 tK',
                     style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w800,
                         color: AppColors.primaryColor),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 150,
                   ),
                   ValueListenableBuilder(

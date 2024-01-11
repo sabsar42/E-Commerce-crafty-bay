@@ -25,7 +25,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
           backgroundColor: Colors.white,
           elevation: 0,
           leading: IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back_ios,
               color: AppColors.primaryColor,
             ),
@@ -33,7 +33,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
               Get.find<MainBottomNavController>().backToHome();
             },
           ),
-          title: Text(
+          title: const Text(
             'CATEGORY',
             style: TextStyle(
                 fontWeight: FontWeight.w400,
@@ -45,14 +45,14 @@ class _CategoryScreenState extends State<CategoryScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
           child: GridView.builder(
               itemCount: 20,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 4,
                 childAspectRatio: 0.95,
                 mainAxisSpacing: 12,
                 crossAxisSpacing: 8,
               ),
               itemBuilder: (context, index) {
-                return FittedBox(child: CategoryItem(title: 'title'));
+                return const FittedBox(child: CategoryItem(title: 'title'));
               }),
         ),
       ),

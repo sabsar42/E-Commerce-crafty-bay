@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SectionTitle extends StatelessWidget {
@@ -18,12 +17,12 @@ class SectionTitle extends StatelessWidget {
       children: [
         Text(
           title,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.w600,
           ),
         ),
-        TextButton(onPressed: onTapSeeAll, child: Text('See All')),
+        TextButton(onPressed: onTapSeeAll, child: const Text('See All')),
       ],
     );
   }

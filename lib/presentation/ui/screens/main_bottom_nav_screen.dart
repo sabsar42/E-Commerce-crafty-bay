@@ -36,7 +36,7 @@ class _MainBottomNavScreenState extends State<MainBottomNavScreen> {
           onTap: (index) {
             controller.changeIndex(index);
           },
-          items: [
+          items: const [
             BottomNavigationBarItem(
                 icon: Icon(Icons.home_filled), label: 'Home'),
             BottomNavigationBarItem(

@@ -36,7 +36,7 @@ class AppThemeData {
           ),
         ),
       ),
-      appBarTheme: AppBarTheme(
+      appBarTheme: const AppBarTheme(
           titleTextStyle: TextStyle(
               fontWeight: FontWeight.w400,
               fontSize: 17,

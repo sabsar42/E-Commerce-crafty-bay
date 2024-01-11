@@ -1,18 +1,14 @@
 import 'package:e_commerce_flutter_crafty_bay/presentation/state_holders/main_bottom_nav_contoller.dart';
-import 'package:e_commerce_flutter_crafty_bay/presentation/ui/screens/category_screen.dart';
 import 'package:e_commerce_flutter_crafty_bay/presentation/ui/screens/product_list_screen.dart';
-import 'package:e_commerce_flutter_crafty_bay/presentation/ui/utility/app_colors.dart';
 import 'package:e_commerce_flutter_crafty_bay/presentation/ui/utility/assets_path.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../widget/category_item.dart';
 import '../widget/home/circle_icon_button.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 
 import '../widget/home/banner_carousel.dart';
 import '../widget/home/section_title.dart';
 import '../widget/product_card_item.dart';
-import 'main_bottom_nav_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -28,18 +24,18 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: appBar,
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16),
+          padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Column(
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 8,
               ),
               searchTextField,
-              SizedBox(
+              const SizedBox(
                 height: 16,
               ),
-              BannerCarousel(),
-              SizedBox(
+              const BannerCarousel(),
+              const SizedBox(
                 height: 16,
               ),
               SectionTitle(
@@ -52,15 +48,15 @@ class _HomeScreenState extends State<HomeScreen> {
               SectionTitle(
                   title: 'Popular',
                   onTapSeeAll: () {
-                   Get.to(()=>ProductListScreen());
+                   Get.to(()=>const ProductListScreen());
                   }),
               productList,
-              SizedBox(
+              const SizedBox(
                 height: 8,
               ),
               SectionTitle(title: 'Special', onTapSeeAll: () {}),
               productList,
-              SizedBox(
+              const SizedBox(
                 height: 8,
               ),
               SectionTitle(title: 'New', onTapSeeAll: () {}),
@@ -81,12 +77,12 @@ class _HomeScreenState extends State<HomeScreen> {
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
-          return CategoryItem(
+          return const CategoryItem(
             title: 'Electronics',
           );
         },
         separatorBuilder: (_, __) {
-          return SizedBox(
+          return const SizedBox(
             width: 10,
           );
         },
@@ -103,10 +99,10 @@ class _HomeScreenState extends State<HomeScreen> {
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
-          return ProductCardItem();
+          return const ProductCardItem();
         },
         separatorBuilder: (_, __) {
-          return SizedBox(
+          return const SizedBox(
             width: 10,
           );
         },
@@ -136,7 +132,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         filled: true,
         fillColor: Colors.grey.shade200,
-        prefixIcon: Icon(
+        prefixIcon: const Icon(
           Icons.search,
           color: Colors.grey,
         ),

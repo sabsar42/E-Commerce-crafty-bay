@@ -1,5 +1,4 @@
 import 'package:e_commerce_flutter_crafty_bay/presentation/ui/screens/auth/verify_email_screen.dart';
-import 'package:e_commerce_flutter_crafty_bay/presentation/ui/utility/assets_path.dart';
 import 'package:e_commerce_flutter_crafty_bay/presentation/ui/widget/app_logo.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -27,7 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Center(
           child: Column(
         children: [
@@ -35,11 +34,11 @@ class _SplashScreenState extends State<SplashScreen> {
           AppLogo(),
           Spacer(),
           CircularProgressIndicator(),
-          const SizedBox(
+          SizedBox(
             height: 16,
           ),
           Text('Version 4.18.0'),
-          const SizedBox(
+          SizedBox(
             height: 16,
           ),
         ],

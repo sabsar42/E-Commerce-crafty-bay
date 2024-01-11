@@ -28,10 +28,10 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
 
   void countOTPTimer() {
     const oneSec = Duration(milliseconds: 1000);
-    _timer = new Timer.periodic(oneSec, (_timer) {
+    _timer = Timer.periodic(oneSec, (timer) {
       if (start == 0) {
         setState(() {
-          _timer.cancel();
+          timer.cancel();
         });
       } else {
         setState(() {
@@ -113,15 +113,15 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
               ),
               RichText(
                 text: TextSpan(
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.grey,
                   ),
                   children: [
-                    TextSpan(text: 'This code will expire in '),
+                    const TextSpan(text: 'This code will expire in '),
                     // TODO - make this timer workable
                     TextSpan(
                       text: '$start',
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: AppColors.primaryColor,
                         fontWeight: FontWeight.w600,
                       ),

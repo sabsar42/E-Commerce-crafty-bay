@@ -26,7 +26,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
           backgroundColor: Colors.white,
           elevation: 0,
           leading: IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back_ios,
               color: AppColors.primaryColor,
             ),
@@ -34,7 +34,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
               Get.find<MainBottomNavController>().backToHome();
             },
           ),
-          title: Text(
+          title: const Text(
             'WISHLIST',
             style: TextStyle(
                 fontWeight: FontWeight.w400,
@@ -53,7 +53,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
                 crossAxisSpacing: 4,
               ),
               itemBuilder: (context, index) {
-                return FittedBox(child: ProductCardItem());
+                return const FittedBox(child: ProductCardItem());
               }),
         ),
       ),

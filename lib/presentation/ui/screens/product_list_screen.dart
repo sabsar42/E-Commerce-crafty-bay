@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../state_holders/main_bottom_nav_contoller.dart';
@@ -24,7 +23,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
         backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back_ios,
             color: AppColors.primaryColor,
           ),
@@ -34,7 +33,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
         ),
         title: Text(
           widget.category ?? 'PRODUCTS',
-          style: TextStyle(
+          style: const TextStyle(
               fontWeight: FontWeight.w400,
               fontSize: 17,
               color: AppColors.primaryColor),
@@ -51,7 +50,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
               crossAxisSpacing: 4,
             ),
             itemBuilder: (context, index) {
-              return FittedBox(child: ProductCardItem());
+              return const FittedBox(child: ProductCardItem());
             }),
       ),
     );
