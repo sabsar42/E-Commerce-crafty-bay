@@ -1,5 +1,6 @@
 import 'package:e_commerce_flutter_crafty_bay/presentation/state_holders/main_bottom_nav_contoller.dart';
 import 'package:e_commerce_flutter_crafty_bay/presentation/ui/screens/category_screen.dart';
+import 'package:e_commerce_flutter_crafty_bay/presentation/ui/screens/product_list_screen.dart';
 import 'package:e_commerce_flutter_crafty_bay/presentation/ui/utility/app_colors.dart';
 import 'package:e_commerce_flutter_crafty_bay/presentation/ui/utility/assets_path.dart';
 import 'package:flutter/material.dart';
@@ -48,7 +49,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
               ),
               categoryList,
-              SectionTitle(title: 'Popular', onTapSeeAll: () {}),
+              SectionTitle(
+                  title: 'Popular',
+                  onTapSeeAll: () {
+                   Get.to(()=>ProductListScreen());
+                  }),
               productList,
               SizedBox(
                 height: 8,

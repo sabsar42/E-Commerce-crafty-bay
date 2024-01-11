@@ -36,6 +36,14 @@ class AppThemeData {
           ),
         ),
       ),
+      appBarTheme: AppBarTheme(
+          titleTextStyle: TextStyle(
+              fontWeight: FontWeight.w400,
+              fontSize: 17,
+              color: AppColors.primaryColor),
+          foregroundColor: Colors.black12,
+          backgroundColor: Colors.white70,
+          elevation: 5),
       textTheme: TextTheme(
         titleLarge: const TextStyle(
           fontSize: 32,
@@ -60,9 +68,8 @@ class AppThemeData {
         ),
       ),
       textButtonTheme: TextButtonThemeData(
-          style: TextButton.styleFrom(
-            foregroundColor: AppColors.primaryColor,
-          )
-      )
-  );
+        style: TextButton.styleFrom(
+          foregroundColor: AppColors.primaryColor,
+        ),
+      ));
 }
