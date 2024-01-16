@@ -38,6 +38,7 @@ dev_dependencies:
   pin_code_fields: ^8.0.1
   carousel_slider: ^4.2.1
   item_count_number_button: ^1.9.2
+  http: ^1.1.0
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
