@@ -1,4 +1,6 @@
+import 'package:e_commerce_flutter_crafty_bay/presentation/state_holders/auth_controller.dart';
 import 'package:e_commerce_flutter_crafty_bay/presentation/ui/screens/auth/verify_email_screen.dart';
+import 'package:e_commerce_flutter_crafty_bay/presentation/ui/screens/main_bottom_nav_screen.dart';
 import 'package:e_commerce_flutter_crafty_bay/presentation/ui/widget/app_logo.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -21,7 +23,12 @@ class _SplashScreenState extends State<SplashScreen> {
     await Future.delayed(
       const Duration(seconds: 2),
     );
-    Get.offAll(const VerifyEmailScreen());
+    final bool isLoggedIn = await Get.find<AuthController>().isLoggedIn();
+    if (isLoggedIn) {
+      Get.offAll(const MainBottomNavScreen());
+    } else {
+      Get.offAll(const VerifyEmailScreen());
+    }
   }
 
   @override

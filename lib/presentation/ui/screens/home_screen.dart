@@ -1,4 +1,6 @@
+import 'package:e_commerce_flutter_crafty_bay/presentation/state_holders/auth_controller.dart';
 import 'package:e_commerce_flutter_crafty_bay/presentation/state_holders/main_bottom_nav_contoller.dart';
+import 'package:e_commerce_flutter_crafty_bay/presentation/ui/screens/auth/verify_email_screen.dart';
 import 'package:e_commerce_flutter_crafty_bay/presentation/ui/screens/product_list_screen.dart';
 import 'package:e_commerce_flutter_crafty_bay/presentation/ui/utility/assets_path.dart';
 import 'package:flutter/material.dart';
@@ -147,7 +149,10 @@ class _HomeScreenState extends State<HomeScreen> {
       title: Image.asset(AssetsPath.logoNav),
       actions: [
         CircleIconButton(
-          onTap: () {},
+          onTap: () async {
+            await Get.find<AuthController>().clearAuthData();
+            Get.offAll(()=>VerifyEmailScreen());
+          },
           iconData: Icons.account_circle_rounded,
         ),
         const SizedBox(

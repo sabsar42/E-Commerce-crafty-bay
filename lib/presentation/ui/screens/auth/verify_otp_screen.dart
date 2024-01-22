@@ -14,7 +14,7 @@ import '../auth/complete_profile_screen.dart';
 import 'package:get/get.dart';
 
 class VerifyOTPScreen extends StatefulWidget {
-  final String? email;
+  final String email;
 
   const VerifyOTPScreen({super.key, required this.email});
 
@@ -115,35 +115,36 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
                 SizedBox(
                   width: double.infinity,
                   child: GetBuilder<VerifyOTPController>(
-                      builder: (verifyOTPController) {
-                    return Visibility(
-                      visible: verifyOTPController.inProgress == false,
-                      replacement: CenterCircularProgressIndicator(),
-                      child: ElevatedButton(
-                        onPressed: () async {
-                          if (_formKey.currentState!.validate()) {
-                            final bool response = await verifyOTPController
-                                .verifyOTP(widget.email, _otpTEController.text);
-                            if (response) {
-                              if(verifyOTPController.shouldNavigateCompleteProfile) {
-                                Get.to(() => CompleteProfileScreen());
-                              }else{
-                                Get.offAll(()=>MainBottomNavScreen());
+                      builder: (verifyOtpController) {
+                        return Visibility(
+                          visible: verifyOtpController.inProgress == false,
+                          replacement: const CenterCircularProgressIndicator(),
+                          child: ElevatedButton(
+                            onPressed: () async {
+                              if (_formKey.currentState!.validate()) {
+                                final bool response = await verifyOtpController.verifyOTP(
+                                    widget.email, _otpTEController.text);
+                                if (response) {
+                                  if (verifyOtpController.shouldNavigateCompleteProfile) {
+                                    Get.to(() => const CompleteProfileScreen());
+                                  } else {
+                                    Get.offAll(() => const MainBottomNavScreen());
+                                  }
+                                } else {
+                                  Get.showSnackbar(GetSnackBar(
+                                    title: 'OTP verification failed',
+                                    message: verifyOtpController.errorMessage,
+                                    duration: const Duration(seconds: 2),
+                                    isDismissible: true,
+                                  ));
+                                }
                               }
-                            } else {
-                              Get.showSnackbar(GetSnackBar(
-                                title: 'OTP Verification Failed',
-                                message: verifyOTPController.errorMessage,
-                                duration: Duration(seconds: 2),
-                                isDismissible: true,
-                              ));
-                            }
-                          }
-                        },
-                        child: const Text('Next'),
-                      ),
-                    );
-                  }),
+                            },
+                            child: const Text('Next'),
+                          ),
+                        );
+                      }
+                  ),
                 ),
                 const SizedBox(
                   height: 24,

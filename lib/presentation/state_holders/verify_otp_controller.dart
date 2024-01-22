@@ -3,6 +3,9 @@ import 'package:e_commerce_flutter_crafty_bay/presentation/state_holders/read_pr
 import 'package:get/get.dart';
 
 import '../../data/utility/urls.dart';
+import 'auth_controller.dart';
+
+
 
 class VerifyOTPController extends GetxController {
   bool _inProgress = false;
@@ -17,33 +20,35 @@ class VerifyOTPController extends GetxController {
 
   bool get shouldNavigateCompleteProfile => _shouldNavigateCompleteProfile;
 
-  Future<bool> verifyOTP(String? email, String? otp) async {
+  String _token = '';
+
+  String get token => _token;
+
+  Future<bool> verifyOTP(String email, String otp) async {
     _inProgress = true;
     update();
-    final response =
-        await NetworkCaller().getRequest(Urls.verifyOtp(email!, otp!));
+    final response = await NetworkCaller().getRequest(Urls.verifyOtp(email, otp));
     _inProgress = false;
     if (response.isSuccess) {
-      final token = response.responseData['data'];
+      _token = response.responseData['data'];
       await Future.delayed(const Duration(seconds: 3));
-      print(token);
       final result =
-          await Get.find<ReadProfileDataController>().readProfileData(token);
+      await Get.find<ReadProfileDataController>().readProfileData(token);
       if (result) {
-        _shouldNavigateCompleteProfile =
-            Get.find<ReadProfileDataController>().isProfileCompleted;
+        _shouldNavigateCompleteProfile = Get.find<ReadProfileDataController>().isProfileCompleted == false;
+        if (_shouldNavigateCompleteProfile == false) {
+          await Get.find<AuthController>().saveUserDetails(token, Get.find<ReadProfileDataController>().profile);
+        }
       } else {
         _errorMessage = Get.find<ReadProfileDataController>().errorMessage;
         update();
         return false;
       }
-      // SAVE to local cache
-      /// if profile exists save existing info
-      /// otherwise goto complite profile and save info
       update();
       return true;
     } else {
       _errorMessage = response.errorMessage;
+      update();
       return false;
     }
   }

@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'dart:math';
 
 import 'package:e_commerce_flutter_crafty_bay/data/models/profile_data.dart';
@@ -6,7 +7,6 @@ import 'package:get/get.dart';
 import '../../data/models/response_data.dart';
 import '../../data/services/network_caller.dart';
 import '../../data/utility/urls.dart';
-
 class ReadProfileDataController extends GetxController {
   bool _inProgress = false;
 
