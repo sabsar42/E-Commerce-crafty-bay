@@ -1,4 +1,5 @@
 import 'package:e_commerce_flutter_crafty_bay/presentation/state_holders/auth_controller.dart';
+import 'package:e_commerce_flutter_crafty_bay/presentation/state_holders/complete_profile_controller.dart';
 import 'package:e_commerce_flutter_crafty_bay/presentation/state_holders/main_bottom_nav_contoller.dart';
 import 'package:e_commerce_flutter_crafty_bay/presentation/state_holders/read_profile_data_controller.dart';
 import 'package:e_commerce_flutter_crafty_bay/presentation/state_holders/send_email_otp_contoller.dart';
@@ -13,5 +14,6 @@ class ControllerBinder extends Bindings {
     Get.put(VerifyOTPController());
     Get.put(ReadProfileDataController());
     Get.put(AuthController());
+    Get.put(CompleteProfileController());
   }
 }
