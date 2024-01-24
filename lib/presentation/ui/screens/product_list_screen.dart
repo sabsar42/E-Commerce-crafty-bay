@@ -7,9 +7,9 @@ import 'package:get/get.dart';
 import '../widget/product_card_item.dart';
 
 class ProductListScreen extends StatefulWidget {
-  final String? category;
-
   const ProductListScreen({super.key, this.category});
+
+  final String? category;
 
   @override
   State<ProductListScreen> createState() => _ProductListScreenState();
@@ -20,38 +20,24 @@ class _ProductListScreenState extends State<ProductListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
         elevation: 0,
-          leading: IconButton(
-            icon: const Icon(
-              Icons.arrow_back_ios,
-              color: AppColors.primaryColor,
-            ),
-            onPressed: () {
-              Get.find<MainBottomNavController>().backToHome();
-            },
-          ),
-        title: Text(
-          widget.category ?? 'PRODUCTS',
-          style: const TextStyle(
-              fontWeight: FontWeight.w400,
-              fontSize: 17,
-              color: AppColors.primaryColor),
-        ),
+        title: Text(widget.category ?? 'Products'),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
         child: GridView.builder(
-            itemCount: 20,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          itemCount: 100,
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 3,
               childAspectRatio: 0.90,
               mainAxisSpacing: 8,
-              crossAxisSpacing: 4,
-            ),
-            itemBuilder: (context, index) {
-              return const FittedBox(child: ProductCardItem());
-            }),
+              crossAxisSpacing: 4),
+          itemBuilder: (context, index) {
+            return const FittedBox(
+              child: ProductCardItem(),
+            );
+          },
+        ),
       ),
     );
   }
