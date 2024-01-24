@@ -22,15 +22,15 @@ class _ProductListScreenState extends State<ProductListScreen> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back_ios,
-            color: AppColors.primaryColor,
+          leading: IconButton(
+            icon: const Icon(
+              Icons.arrow_back_ios,
+              color: AppColors.primaryColor,
+            ),
+            onPressed: () {
+              Get.find<MainBottomNavController>().backToHome();
+            },
           ),
-          onPressed: () {
-            Get.find<MainBottomNavController>().backToHome();
-          },
-        ),
         title: Text(
           widget.category ?? 'PRODUCTS',
           style: const TextStyle(

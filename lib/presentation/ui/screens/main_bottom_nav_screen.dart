@@ -6,6 +6,8 @@ import 'package:e_commerce_flutter_crafty_bay/presentation/ui/utility/app_colors
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../state_holders/category_controller.dart';
+import '../../state_holders/home_banner_controller.dart';
 import '../../state_holders/main_bottom_nav_contoller.dart';
 
 class MainBottomNavScreen extends StatefulWidget {
@@ -22,6 +24,13 @@ class _MainBottomNavScreenState extends State<MainBottomNavScreen> {
     CartsScreen(),
     WishlistScreen(),
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    Get.find<HomeBannerController>().getBannerList();
+    Get.find<CategoryController>().getCategoryList();
+  }
 
   @override
   Widget build(BuildContext context) {

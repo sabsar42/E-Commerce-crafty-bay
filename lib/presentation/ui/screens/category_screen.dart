@@ -1,6 +1,8 @@
+import 'package:e_commerce_flutter_crafty_bay/presentation/state_holders/category_controller.dart';
 import 'package:e_commerce_flutter_crafty_bay/presentation/state_holders/main_bottom_nav_contoller.dart';
 import 'package:e_commerce_flutter_crafty_bay/presentation/ui/utility/app_colors.dart';
 import 'package:e_commerce_flutter_crafty_bay/presentation/ui/widget/category_item.dart';
+import 'package:e_commerce_flutter_crafty_bay/presentation/ui/widget/center_circular_progress_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -41,19 +43,38 @@ class _CategoryScreenState extends State<CategoryScreen> {
                 color: AppColors.primaryColor),
           ),
         ),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: GridView.builder(
-              itemCount: 20,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 4,
-                childAspectRatio: 0.95,
-                mainAxisSpacing: 12,
-                crossAxisSpacing: 8,
-              ),
-              itemBuilder: (context, index) {
-                return const FittedBox(child: CategoryItem(title: 'title'));
-              }),
+        body: RefreshIndicator(
+          onRefresh: () async {
+            Get.find<CategoryController>().getCategoryList();
+          },
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child:
+                GetBuilder<CategoryController>(builder: (categoryController) {
+              return Visibility(
+                visible: categoryController.inProgress == false,
+                replacement: CenterCircularProgressIndicator(),
+                child: GridView.builder(
+                    itemCount: categoryController
+                            .categoryListModel?.categoryListItem?.length ??
+                        0,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 4,
+                      childAspectRatio: 0.95,
+                      mainAxisSpacing: 12,
+                      crossAxisSpacing: 8,
+                    ),
+                    itemBuilder: (context, index) {
+                      return FittedBox(
+                          child: CategoryItem(
+                        categoryListItem: categoryController
+                            .categoryListModel.categoryListItem![index],
+                      ));
+                    }),
+              );
+            }),
+          ),
         ),
       ),
     );

@@ -1,28 +1,24 @@
 import 'package:e_commerce_flutter_crafty_bay/presentation/ui/screens/product_list_screen.dart';
 import 'package:flutter/material.dart';
 
+import '../../../data/models/category_list_item.dart';
 import '../utility/app_colors.dart';
 import 'package:get/get.dart';
 
-class CategoryItem extends StatefulWidget {
+class CategoryItem extends StatelessWidget {
   const CategoryItem({
     super.key,
-    required this.title,
+    required this.categoryListItem,
   });
 
-  final String title;
+  final CategoryListItem categoryListItem;
 
-  @override
-  State<CategoryItem> createState() => _CategoryItemState();
-}
-
-class _CategoryItemState extends State<CategoryItem> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         Get.to(() => ProductListScreen(
-              category: widget.title,
+              category: categoryListItem.categoryName ?? '',
             ));
       },
       child: Column(
@@ -30,17 +26,16 @@ class _CategoryItemState extends State<CategoryItem> {
           Card(
             elevation: 0,
             color: AppColors.primaryColor.withOpacity(0.1),
-            child: const Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Icon(
-                Icons.computer_outlined,
-                size: 32,
-                color: AppColors.primaryColor,
-              ),
-            ),
+            child: Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Image.network(
+                  categoryListItem.categoryImg ?? '',
+                  width: 40,
+                  height: 40,
+                )),
           ),
           Text(
-            widget.title,
+            categoryListItem.categoryName ?? '',
             style: const TextStyle(
                 fontWeight: FontWeight.w400,
                 fontSize: 13,

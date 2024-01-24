@@ -1,8 +1,12 @@
+import 'package:e_commerce_flutter_crafty_bay/data/models/category_list_item.dart';
 import 'package:e_commerce_flutter_crafty_bay/presentation/state_holders/auth_controller.dart';
+import 'package:e_commerce_flutter_crafty_bay/presentation/state_holders/category_controller.dart';
+import 'package:e_commerce_flutter_crafty_bay/presentation/state_holders/home_banner_controller.dart';
 import 'package:e_commerce_flutter_crafty_bay/presentation/state_holders/main_bottom_nav_contoller.dart';
 import 'package:e_commerce_flutter_crafty_bay/presentation/ui/screens/auth/verify_email_screen.dart';
 import 'package:e_commerce_flutter_crafty_bay/presentation/ui/screens/product_list_screen.dart';
 import 'package:e_commerce_flutter_crafty_bay/presentation/ui/utility/assets_path.dart';
+import 'package:e_commerce_flutter_crafty_bay/presentation/ui/widget/center_circular_progress_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../widget/category_item.dart';
@@ -36,7 +40,20 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(
                 height: 16,
               ),
-              const BannerCarousel(),
+              SizedBox(
+                  height: 210,
+                  child: GetBuilder<HomeBannerController>(
+                      builder: (homeBannerController) {
+                    return Visibility(
+                      visible: homeBannerController.inProgress == false,
+                      replacement: CenterCircularProgressIndicator(),
+                      child: BannerCarousel(
+                        bannerList:
+                            homeBannerController.bannerListModel.bannerList ??
+                                [],
+                      ),
+                    );
+                  })),
               const SizedBox(
                 height: 16,
               ),
@@ -50,7 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
               SectionTitle(
                   title: 'Popular',
                   onTapSeeAll: () {
-                   Get.to(()=>const ProductListScreen());
+                    Get.to(() => const ProductListScreen());
                   }),
               productList,
               const SizedBox(
@@ -73,22 +90,31 @@ class _HomeScreenState extends State<HomeScreen> {
   SizedBox get categoryList {
     return SizedBox(
       height: 120,
-      child: ListView.separated(
-        itemCount: 10,
-        primary: false,
-        shrinkWrap: true,
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) {
-          return const CategoryItem(
-            title: 'Electronics',
-          );
-        },
-        separatorBuilder: (_, __) {
-          return const SizedBox(
-            width: 10,
-          );
-        },
-      ),
+      child: GetBuilder<CategoryController>(builder: (categoryController) {
+        return Visibility(
+          visible: categoryController.inProgress == false,
+          replacement: CenterCircularProgressIndicator(),
+          child: ListView.separated(
+            itemCount: categoryController
+                    .categoryListModel?.categoryListItem?.length ??
+                0,
+            primary: false,
+            shrinkWrap: true,
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (context, index) {
+              return CategoryItem(
+                categoryListItem: categoryController
+                    .categoryListModel.categoryListItem![index],
+              );
+            },
+            separatorBuilder: (_, __) {
+              return const SizedBox(
+                width: 10,
+              );
+            },
+          ),
+        );
+      }),
     );
   }
 
@@ -151,7 +177,7 @@ class _HomeScreenState extends State<HomeScreen> {
         CircleIconButton(
           onTap: () async {
             await Get.find<AuthController>().clearAuthData();
-            Get.offAll(()=>VerifyEmailScreen());
+            Get.offAll(() => VerifyEmailScreen());
           },
           iconData: Icons.account_circle_rounded,
         ),
