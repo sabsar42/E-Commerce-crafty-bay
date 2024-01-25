@@ -1,19 +1,24 @@
+import 'package:e_commerce_flutter_crafty_bay/data/models/product_model.dart';
 import 'package:e_commerce_flutter_crafty_bay/presentation/ui/screens/product_details_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../utility/app_colors.dart';
 import '../utility/assets_path.dart';
 import 'package:get/get.dart';
+
 class ProductCardItem extends StatelessWidget {
   const ProductCardItem({
     super.key,
+    required this.product,
   });
+
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: (){
-        Get.to(()=>ProductDetailsScreen());
+      onTap: () {
+        Get.to(() => ProductDetailsScreen());
       },
       borderRadius: BorderRadius.circular(16),
       child: SizedBox(
@@ -31,11 +36,11 @@ class ProductCardItem extends StatelessWidget {
                     topLeft: Radius.circular(16),
                     topRight: Radius.circular(16),
                   ),
-                  child: Image.asset(
-                    AssetsPath.dummyShoeImagePng,
+                  child: Image.network(
+                    product.image ?? '',
                     width: 160,
                     height: 120,
-
+                    fit: BoxFit.scaleDown,
                   ),
                 ),
                 Padding(
@@ -43,8 +48,8 @@ class ProductCardItem extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        'Nike Sneaker v100 Onek Boro',
+                      Text(
+                        product.title ?? '',
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
@@ -53,19 +58,20 @@ class ProductCardItem extends StatelessWidget {
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
-
                       Row(
                         // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text(
-                            '\$120',
+                           Text(
+                            '\$${product.price ?? 0}',
                             style: TextStyle(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w600,
                                 color: AppColors.primaryColor),
                           ),
-                          const SizedBox(width: 8,),
-                          const Wrap(
+                          const SizedBox(
+                            width: 8,
+                          ),
+                           Wrap(
                             crossAxisAlignment: WrapCrossAlignment.center,
                             children: [
                               Icon(
@@ -74,7 +80,7 @@ class ProductCardItem extends StatelessWidget {
                                 color: Colors.orangeAccent,
                               ),
                               Text(
-                                '4.5',
+                                '${product.star ?? 0}',
                                 style: TextStyle(
                                     fontSize: 12,
                                     fontWeight: FontWeight.w600,
@@ -82,7 +88,9 @@ class ProductCardItem extends StatelessWidget {
                               ),
                             ],
                           ),
-                          const SizedBox(width: 8,),
+                          const SizedBox(
+                            width: 8,
+                          ),
                           Card(
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(6),
@@ -108,4 +116,3 @@ class ProductCardItem extends StatelessWidget {
     );
   }
 }
-
