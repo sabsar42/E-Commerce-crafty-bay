@@ -13,6 +13,7 @@ class CategoryItem extends StatelessWidget {
 
   final CategoryListItem categoryListItem;
 
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -22,6 +23,7 @@ class CategoryItem extends StatelessWidget {
               catrgoryId: categoryListItem.id,
             ));
       },
+
       child: Column(
         children: [
           Card(
