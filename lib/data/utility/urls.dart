@@ -5,6 +5,7 @@ class Urls {
 
   static String verifyOtp(String email, String otp) =>
       '$_baseUrl/VerifyLogin/$email/$otp';
+
   static String readProfile = '$_baseUrl/ReadProfile';
   static String createProfile = '$_baseUrl/CreateProfile';
   static String homeBanner = '$_baseUrl/ListProductSlider';
@@ -17,7 +18,7 @@ class Urls {
       '$_baseUrl/ListProductByCategory/$categoryId';
 
   static String productDetails(int productId) =>
-      '$_baseUrl/ListProductDetailsById/$productId';
-
+      '$_baseUrl/ProductDetailsById/$productId';
   static String addToCart = '$_baseUrl/CreateCartList';
+  static String cartList = '$_baseUrl/CartList';
 }

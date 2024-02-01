@@ -8,6 +8,12 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'dart:convert';
+
+
+import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 class AuthController extends GetxController {
   static String? token;
   Profile? profile;
@@ -29,6 +35,7 @@ class AuthController extends GetxController {
     await initialize();
     return token != null;
   }
+
   bool get isTokenNotNull => token != null;
 
   Future<String?> _getToken() async {

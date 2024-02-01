@@ -5,15 +5,15 @@ import 'package:item_count_number_button/item_count_number_button.dart';
 
 import '../../utility/app_colors.dart';
 
-class CrardProductItem extends StatefulWidget {
-  const CrardProductItem({super.key});
+class CardProductItem extends StatefulWidget {
+  const CardProductItem({super.key});
 
   @override
-  State<CrardProductItem> createState() => _CrardProductItemState();
+  State<CardProductItem> createState() => _CardProductItemState();
 }
 
 
-class _CrardProductItemState extends State<CrardProductItem> {
+class _CardProductItemState extends State<CardProductItem> {
   ValueNotifier<int> noOfItem = ValueNotifier(1);
 
   @override

@@ -1,44 +1,33 @@
 
 import 'package:e_commerce_flutter_crafty_bay/data/models/product_model.dart';
 
-class ProductDetailsData {
+class CartItem {
   int? id;
-  String? img1;
-  String? img2;
-  String? img3;
-  String? img4;
-  String? des;
+  String? email;
+  int? productId;
   String? color;
   String? size;
-  int? productId;
   String? createdAt;
   String? updatedAt;
   ProductModel? product;
+  int quantity = 1;
 
-  ProductDetailsData(
+  CartItem(
       {this.id,
-        this.img1,
-        this.img2,
-        this.img3,
-        this.img4,
-        this.des,
+        this.email,
+        this.productId,
         this.color,
         this.size,
-        this.productId,
         this.createdAt,
         this.updatedAt,
         this.product});
 
-  ProductDetailsData.fromJson(Map<String, dynamic> json) {
+  CartItem.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    img1 = json['img1'];
-    img2 = json['img2'];
-    img3 = json['img3'];
-    img4 = json['img4'];
-    des = json['des'];
+    email = json['email'];
+    productId = json['product_id'];
     color = json['color'];
     size = json['size'];
-    productId = json['product_id'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     product =
@@ -48,14 +37,10 @@ class ProductDetailsData {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
-    data['img1'] = img1;
-    data['img2'] = img2;
-    data['img3'] = img3;
-    data['img4'] = img4;
-    data['des'] = des;
+    data['email'] = email;
+    data['product_id'] = productId;
     data['color'] = color;
     data['size'] = size;
-    data['product_id'] = productId;
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;
     if (product != null) {
