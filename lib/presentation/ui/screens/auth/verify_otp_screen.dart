@@ -13,10 +13,11 @@ import '../../widget/center_circular_progress_indicator.dart';
 import '../auth/complete_profile_screen.dart';
 import 'package:get/get.dart';
 
-class VerifyOTPScreen extends StatefulWidget {
-  final String email;
 
+class VerifyOTPScreen extends StatefulWidget {
   const VerifyOTPScreen({super.key, required this.email});
+
+  final String email;
 
   @override
   State<VerifyOTPScreen> createState() => _VerifyOTPScreenState();
@@ -25,31 +26,6 @@ class VerifyOTPScreen extends StatefulWidget {
 class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
   final TextEditingController _otpTEController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
-  Timer? _timer;
-  int start = 120;
-  late String count;
-
-  @override
-  void initState() {
-    super.initState();
-    countOTPTimer();
-  }
-
-  void countOTPTimer() {
-    const oneSec = Duration(milliseconds: 1000);
-    _timer = Timer.periodic(oneSec, (timer) {
-      if (start == 0) {
-        setState(() {
-          timer.cancel();
-        });
-      } else {
-        setState(() {
-          start--;
-        });
-      }
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -150,16 +126,16 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
                   height: 24,
                 ),
                 RichText(
-                  text: TextSpan(
-                    style: const TextStyle(
+                  text: const TextSpan(
+                    style: TextStyle(
                       color: Colors.grey,
                     ),
                     children: [
-                      const TextSpan(text: 'This code will expire in '),
+                      TextSpan(text: 'This code will expire '),
                       // TODO - make this timer workable
                       TextSpan(
-                        text: '$start',
-                        style: const TextStyle(
+                        text: '120s',
+                        style: TextStyle(
                           color: AppColors.primaryColor,
                           fontWeight: FontWeight.w600,
                         ),
@@ -167,25 +143,13 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
                     ],
                   ),
                 ),
-                GetBuilder<SendEmailOtpController>(
-                    builder: (sendEmailOtpController) {
-                  return Visibility(
-                    replacement: CenterCircularProgressIndicator(),
-                    child: TextButton(
-                      onPressed: () {
-                        sendEmailOtpController.sendOtpToEmail(widget.email!);
-                        setState(() {
-                          start = 120;
-                        });
-                        countOTPTimer();
-                      },
-                      child: const Text(
-                        'Resend Code',
-                        style: TextStyle(color: Colors.grey),
-                      ),
-                    ),
-                  );
-                }),
+                TextButton(
+                  onPressed: () {},
+                  child: const Text(
+                    'Resend Code',
+                    style: TextStyle(color: Colors.grey),
+                  ),
+                ),
               ],
             ),
           ),

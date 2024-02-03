@@ -16,11 +16,10 @@ class CategoryScreen extends StatefulWidget {
 class _CategoryScreenState extends State<CategoryScreen> {
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      // This ( WillPopScope ) Depriciated, so Chnage it to PopScope when Flutte-SDK upadates
-      onWillPop: () async {
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (_) {
         Get.find<MainBottomNavController>().backToHome();
-        return false; //for Not opting out from the App
       },
       child: Scaffold(
         appBar: AppBar(

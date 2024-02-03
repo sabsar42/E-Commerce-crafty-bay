@@ -8,14 +8,14 @@ import '../utility/app_colors.dart';
 
 import '../widget/carts/card_product_item.dart';
 
-class CartsScreen extends StatefulWidget {
-  const CartsScreen({super.key});
+class CartListScreen extends StatefulWidget {
+  const CartListScreen({super.key});
 
   @override
-  State<CartsScreen> createState() => _CartsScreenState();
+  State<CartListScreen> createState() => _CartListScreenState();
 }
 
-class _CartsScreenState extends State<CartsScreen> {
+class _CartListScreenState extends State<CartListScreen> {
   @override
   void initState() {
     super.initState();
@@ -26,10 +26,10 @@ class _CartsScreenState extends State<CartsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (_) {
         Get.find<MainBottomNavController>().backToHome();
-        return false; //for Not opting out from the App
       },
       child: Scaffold(
         appBar: AppBar(
@@ -61,7 +61,10 @@ class _CartsScreenState extends State<CartsScreen> {
               Expanded(
                   child: ListView.separated(
                       itemBuilder: (context, index) {
-                        return const CardProductItem();
+                        return CartProductItem(
+                          cartItem: cartListController
+                              .cartListModel.cartItemList![index],
+                        );
                       },
                       separatorBuilder: (_, __) => const SizedBox(
                             height: 8,
@@ -69,7 +72,7 @@ class _CartsScreenState extends State<CartsScreen> {
                       itemCount: cartListController
                               .cartListModel.cartItemList?.length ??
                           0)),
-              totalPriceAndCheckOutSection(),
+              totalPriceAndCheckOutSection(cartListController.totalPrice),
             ],
           );
         }),
@@ -77,7 +80,7 @@ class _CartsScreenState extends State<CartsScreen> {
     );
   }
 
-  Container totalPriceAndCheckOutSection() {
+  Container totalPriceAndCheckOutSection(RxDouble totalPrice) {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -89,7 +92,7 @@ class _CartsScreenState extends State<CartsScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Column(
+          Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
@@ -99,13 +102,15 @@ class _CartsScreenState extends State<CartsScreen> {
                     fontWeight: FontWeight.w400,
                     color: Colors.black38),
               ),
-              Text(
-                '12,200 tK',
-                style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w800,
-                    color: AppColors.primaryColor),
-              ),
+              Obx(() {
+                return Text(
+                  '\$$totalPrice',
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w800,
+                      color: AppColors.primaryColor),
+                );
+              }),
             ],
           ),
           SizedBox(

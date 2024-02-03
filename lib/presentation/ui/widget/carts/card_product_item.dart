@@ -3,18 +3,25 @@ import 'package:flutter/material.dart';
 
 import 'package:item_count_number_button/item_count_number_button.dart';
 
+import '../../../../data/models/cart_item.dart';
+import '../../../state_holders/cart_list_controller.dart';
 import '../../utility/app_colors.dart';
 
-class CardProductItem extends StatefulWidget {
-  const CardProductItem({super.key});
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:item_count_number_button/item_count_number_button.dart';
+
+class CartProductItem extends StatefulWidget {
+  const CartProductItem({super.key, required this.cartItem});
+
+  final CartItem cartItem;
 
   @override
-  State<CardProductItem> createState() => _CardProductItemState();
+  State<CartProductItem> createState() => _CartProductItemState();
 }
 
-
-class _CardProductItemState extends State<CardProductItem> {
-  ValueNotifier<int> noOfItem = ValueNotifier(1);
+class _CartProductItemState extends State<CartProductItem> {
+  ValueNotifier<int> noOfItems = ValueNotifier(1);
 
   @override
   Widget build(BuildContext context) {
@@ -22,85 +29,86 @@ class _CardProductItemState extends State<CardProductItem> {
       elevation: 3,
       child: Row(
         children: [
-          Image.asset(
-            AssetsPath.dummyShoeImagePng,
+          Image.network(
+            widget.cartItem.product?.image ?? '',
             width: 100,
           ),
           const SizedBox(
             width: 8,
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  const Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Nike Shoe 21 Edition',
-                        style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.black38),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      Row(
+          Expanded(
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Color : RED'),
-                          SizedBox(
-                            width: 8,
+                          Text(
+                            widget.cartItem.product?.title ?? '',
+                            maxLines: 1,
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.black54,
+                              overflow: TextOverflow.ellipsis,
+                            ),
                           ),
-                          Text('SIZE : L'),
+                          Row(
+                            children: [
+                              Text('Color: ${widget.cartItem.color ?? ''}'),
+                              const SizedBox(
+                                width: 8,
+                              ),
+                              Text('Size:  ${widget.cartItem.size ?? ''}'),
+                            ],
+                          )
                         ],
                       ),
-                    ],
-                  ),
-                  const SizedBox(
-                    width: 80,
-                  ),
-                  IconButton(
+                    ),
+                    IconButton(
                       onPressed: () {},
                       icon: const Icon(
-                        Icons.delete_outline_rounded,
-                        color: Colors.black38,
-                      ))
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  const Text(
-                    '\$120 tK',
-                    style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w800,
-                        color: AppColors.primaryColor),
-                  ),
-                  const SizedBox(
-                    width: 150,
-                  ),
-                  ValueListenableBuilder(
-                      valueListenable: noOfItem,
-                      builder: (context, value, _) {
-                        return ItemCount(
-                          color: AppColors.primaryColor,
-                          initialValue: value,
-                          minValue: 1,
-                          maxValue: 20,
-                          onChanged: (v) {
-                            noOfItem.value = v.toInt();
-                            print('Selected value $value');
-                            setState(() {});
-                          },
-                          step: 1,
-                          decimalPlaces: 0,
-                        );
-                      })
-                ],
-              )
-            ],
+                        Icons.delete_forever_outlined,
+                        color: Colors.grey,
+                      ),
+                    )
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      '৳${widget.cartItem.product?.price ?? 0}',
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: AppColors.primaryColor,
+                      ),
+                    ),
+                    ValueListenableBuilder(
+                        valueListenable: noOfItems,
+                        builder: (context, value, _) {
+                          /// TODO - Design a item counter
+                          return ItemCount(
+                            initialValue: value,
+                            minValue: 1,
+                            maxValue: 20,
+                            decimalPlaces: 0,
+                            step: 1,
+                            color: AppColors.primaryColor,
+                            onChanged: (v) {
+                              noOfItems.value = v.toInt();
+                              Get.find<CartListController>().updateQuantity(
+                                  widget.cartItem.id!, noOfItems.value);
+                            },
+                          );
+                        }),
+                  ],
+                )
+              ],
+            ),
           )
         ],
       ),

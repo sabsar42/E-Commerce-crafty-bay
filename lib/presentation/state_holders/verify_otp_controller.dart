@@ -6,7 +6,6 @@ import '../../data/utility/urls.dart';
 import 'auth_controller.dart';
 
 
-
 class VerifyOTPController extends GetxController {
   bool _inProgress = false;
 

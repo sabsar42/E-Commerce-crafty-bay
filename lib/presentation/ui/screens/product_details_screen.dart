@@ -1,5 +1,3 @@
-// ignore_for_file: curly_braces_in_flow_control_structures
-
 import 'package:e_commerce_flutter_crafty_bay/presentation/state_holders/add_to_cart_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -63,34 +61,27 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
       body: GetBuilder<ProductDetailsController>(
           builder: (productDetailsController) {
         if (productDetailsController.inProgress) {
-          return CenterCircularProgressIndicator();
+          return const CenterCircularProgressIndicator();
         }
-        return Visibility(
-          visible: productDetailsController.inProgress == false,
-          replacement: const CenterCircularProgressIndicator(),
-          child: Column(
-            children: [
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      ProductImageCarousel(
-                        urls: [
-                          productDetailsController.productDetails.img1 ?? '',
-                          productDetailsController.productDetails.img2 ?? '',
-                          productDetailsController.productDetails.img3 ?? '',
-                          productDetailsController.productDetails.img4 ?? '',
-                        ],
-                      ),
-                      productDetailsBody(
-                          productDetailsController.productDetails),
+        return Column(
+          children: [
+            SingleChildScrollView(
+              child: Column(
+                children: [
+                  ProductImageCarousel(
+                    urls: [
+                      productDetailsController.productDetails.img1 ?? '',
+                      productDetailsController.productDetails.img2 ?? '',
+                      productDetailsController.productDetails.img3 ?? '',
+                      productDetailsController.productDetails.img4 ?? '',
                     ],
                   ),
-                ),
+                  productDetailsBody(productDetailsController.productDetails),
+                ],
               ),
-              priceAndAddToCartSection
-            ],
-          ),
+            ),
+            priceAndAddToCartSection
+          ],
         );
       }),
     );
@@ -323,21 +314,23 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     color = color.toLowerCase();
     if (color == 'red') {
       return Colors.red;
-    } else if (color == 'green')
+    } else if (color == 'white') {
+      return Colors.white;
+    } else if (color == 'green') {
       return Colors.green;
-    else if (color == 'white') return Colors.white;
+    }
     return Colors.grey;
   }
 
   String colorToString(Color color) {
     if (color == Colors.red) {
-      return 'red';
-    } else if (color == Colors.green) {
-      return 'green';
+      return 'Red';
     } else if (color == Colors.white) {
-      return 'white';
+      return 'White';
+    } else if (color == Colors.green) {
+      return 'Green';
     }
-    return 'grey';
+    return 'Grey';
   }
 
 // Color getColorFromString(String colorCode) {
@@ -347,8 +340,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
 // }
 //
 // String colorToHashColorCode(String colorCode) {
-//   return colorCode
-//       .toString()
+//   return colorCode.toString()
 //       .replaceAll('0xff', '#')
 //       .replaceAll('Color(', '')
 //       .replaceAll(')', '');
