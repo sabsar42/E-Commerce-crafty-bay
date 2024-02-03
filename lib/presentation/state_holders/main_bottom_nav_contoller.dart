@@ -1,3 +1,4 @@
+import 'package:e_commerce_flutter_crafty_bay/presentation/state_holders/auth_controller.dart';
 import 'package:get/get.dart';
 
 class MainBottomNavController extends GetxController {
@@ -9,8 +10,12 @@ class MainBottomNavController extends GetxController {
     if (index == _selctedIndex) {
       return;
     }
-    _selctedIndex = index;
-    update();
+    if (index == 2 || index == 3) {
+      if (Get.find<AuthController>().isTokenNotNull == false) {
+        AuthController.goToLogin();
+        return;
+      }
+    }
   }
 
   void backToHome() {

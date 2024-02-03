@@ -80,10 +80,13 @@ class _BannerCarouselState extends State<BannerCarousel> {
                   width: MediaQuery.of(context).size.width,
                   margin: const EdgeInsets.symmetric(horizontal: 1.0),
                   decoration: BoxDecoration(
-                      color: AppColors.primaryColor,
-                      borderRadius: BorderRadius.circular(8),
-                      image: DecorationImage(
-                          image: NetworkImage(banner.image ?? ''))),
+                    color: AppColors.primaryColor,
+                    borderRadius: BorderRadius.circular(8),
+                    image: DecorationImage(
+                      image: NetworkImage(banner.image ?? ''),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 ),
                 Positioned(
                   left: 3,
