@@ -7,6 +7,8 @@ import 'package:get/get.dart';
 import '../utility/app_colors.dart';
 
 import '../widget/carts/card_product_item.dart';
+import 'checkout_screen.dart';
+
 
 class CartListScreen extends StatefulWidget {
   const CartListScreen({super.key});
@@ -16,6 +18,7 @@ class CartListScreen extends StatefulWidget {
 }
 
 class _CartListScreenState extends State<CartListScreen> {
+
   @override
   void initState() {
     super.initState();
@@ -33,49 +36,39 @@ class _CartListScreenState extends State<CartListScreen> {
       },
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.white,
-          elevation: 0,
+          title: const Text('Carts'),
           leading: IconButton(
-            icon: const Icon(
-              Icons.arrow_back_ios,
-              color: AppColors.primaryColor,
-            ),
             onPressed: () {
               Get.find<MainBottomNavController>().backToHome();
             },
-          ),
-          title: const Text(
-            'CART',
-            style: TextStyle(
-                fontWeight: FontWeight.w400,
-                fontSize: 17,
-                color: AppColors.primaryColor),
+            icon: const Icon(Icons.arrow_back_ios),
           ),
         ),
-        body: GetBuilder<CartListController>(builder: (cartListController) {
-          if (cartListController.inProgress) {
-            return CenterCircularProgressIndicator();
-          }
-          return Column(
-            children: [
-              Expanded(
-                  child: ListView.separated(
+        body: GetBuilder<CartListController>(
+            builder: (cartListController) {
+              if (cartListController.inProgress == true) {
+                return const CenterCircularProgressIndicator();
+              }
+              return Column(
+                children: [
+                  Expanded(
+                    child: ListView.separated(
+                      itemCount: cartListController.cartListModel.cartItemList?.length ?? 0,
                       itemBuilder: (context, index) {
                         return CartProductItem(
-                          cartItem: cartListController
-                              .cartListModel.cartItemList![index],
+                          cartItem: cartListController.cartListModel.cartItemList![index],
                         );
                       },
                       separatorBuilder: (_, __) => const SizedBox(
-                            height: 8,
-                          ),
-                      itemCount: cartListController
-                              .cartListModel.cartItemList?.length ??
-                          0)),
-              totalPriceAndCheckOutSection(cartListController.totalPrice),
-            ],
-          );
-        }),
+                        height: 8,
+                      ),
+                    ),
+                  ),
+                  totalPriceAndCheckOutSection(cartListController.totalPrice)
+                ],
+              );
+            }
+        ),
       ),
     );
   }
@@ -84,10 +77,10 @@ class _CartListScreenState extends State<CartListScreen> {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-          color: AppColors.primaryColor.withOpacity(0.11),
+          color: AppColors.primaryColor.withOpacity(0.15),
           borderRadius: const BorderRadius.only(
-            topRight: Radius.circular(18),
-            topLeft: Radius.circular(18),
+            topLeft: Radius.circular(16),
+            topRight: Radius.circular(16),
           )),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -95,29 +88,30 @@ class _CartListScreenState extends State<CartListScreen> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 'Total Price',
                 style: TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.w400,
-                    color: Colors.black38),
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black45),
               ),
-              Obx(() {
-                return Text(
-                  '\$$totalPrice',
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w800,
-                      color: AppColors.primaryColor),
-                );
-              }),
+              Obx(() =>  Text(
+                '৳$totalPrice',
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.primaryColor,
+                ),
+              )),
             ],
           ),
           SizedBox(
             width: 100,
             child: ElevatedButton(
-              onPressed: () {},
-              child: const Text('Check Out'),
+              onPressed: () {
+                Get.to(() => const CheckoutScreen());
+              },
+              child: const Text('Check out'),
             ),
           ),
         ],

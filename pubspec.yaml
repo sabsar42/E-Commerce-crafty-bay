@@ -41,6 +41,7 @@ dev_dependencies:
   item_count_number_button: ^1.9.2
   http: ^1.1.0
   shared_preferences: ^2.2.2
+  webview_flutter: ^4.7.0
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 

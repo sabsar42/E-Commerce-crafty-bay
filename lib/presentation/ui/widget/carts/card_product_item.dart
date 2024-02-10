@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:item_count_number_button/item_count_number_button.dart';
 
+
 class CartProductItem extends StatefulWidget {
   const CartProductItem({super.key, required this.cartItem});
 
@@ -21,7 +22,13 @@ class CartProductItem extends StatefulWidget {
 }
 
 class _CartProductItemState extends State<CartProductItem> {
-  ValueNotifier<int> noOfItems = ValueNotifier(1);
+  late ValueNotifier<int> noOfItems = ValueNotifier(widget.cartItem.quantity);
+
+  @override
+  void initState() {
+    print(widget.cartItem.quantity);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
