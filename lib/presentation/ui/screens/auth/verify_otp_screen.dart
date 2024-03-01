@@ -26,6 +26,30 @@ class VerifyOTPScreen extends StatefulWidget {
 class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
   final TextEditingController _otpTEController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  Timer? _timer;
+  int start = 120;
+  late String count;
+
+  @override
+  void initState() {
+    super.initState();
+    countOTPTimer();
+  }
+
+  void countOTPTimer() {
+    const oneSec = Duration(milliseconds: 1000);
+    _timer = new Timer.periodic(oneSec, (_timer) {
+      if (start == 0) {
+        setState(() {
+          _timer.cancel();
+        });
+      } else {
+        setState(() {
+          start--;
+        });
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -126,15 +150,15 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
                   height: 24,
                 ),
                 RichText(
-                  text: const TextSpan(
+                  text: TextSpan(
                     style: TextStyle(
                       color: Colors.grey,
                     ),
                     children: [
-                      TextSpan(text: 'This code will expire '),
+                      TextSpan(text: 'This code will expire in '),
                       // TODO - make this timer workable
                       TextSpan(
-                        text: '120s',
+                        text: '$start',
                         style: TextStyle(
                           color: AppColors.primaryColor,
                           fontWeight: FontWeight.w600,
@@ -144,7 +168,12 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
                   ),
                 ),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    setState(() {
+                      start = 120;
+                    });
+                    countOTPTimer();
+                  },
                   child: const Text(
                     'Resend Code',
                     style: TextStyle(color: Colors.grey),
